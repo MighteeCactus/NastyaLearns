@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {list-style: none;}
+a {text-decoration: none;}
+img {max-width: 100%;}
+
+html, body {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --clr-bg: #1e3b4c;
+    --clr-bg-tab: #2b535e;
+    --clr-bg-tab-active: #3a6d75;
+    --clr-text: #c6d1d1
+}
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--clr-bg);
+    color: var(--clr-text);
+    font-size: 0.8em;
+}
+
+.content {
+    margin: 0 auto;
+}
+
+.header {
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    font-size: 1.0em;
+}
+
+.tab-header {
+
+}
+
+.tab-header li {
+    padding: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: var(--clr-bg-tab);
+}
+
+.tab-header li.tab-active {
+    background-color: var(--clr-bg-tab-active);
+}
+
+.tab-header-flex {
+    display: flex;
+    gap: 5px;
+    font-size: 1.2em;
+}
+
+.tab {
+    margin: 10px;
+    padding: 10px;
+}
+
+.question {
+    list-style: decimal;
+}
+
+.question input[type="text"] {
+    background-color: rgba(0,0,0,0.4);
+    outline: none;
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    border-radius: 5px;
+    max-width: 100px;
+    color: inherit;
+    padding: 3px;
+}
+
+button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 50px;
+}
