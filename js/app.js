@@ -24,12 +24,6 @@ function initializeWorkbook() {
         const section = tplForm.cloneNode(true)
         section.querySelector('input#section').setAttribute('value', lesson.name_en)
 
-        const form = section.querySelector('form')
-        form.setAttribute('name',form.name + ' ' + lesson.name_en)
-        try {
-            section.querySelector('input[name="form-name"]').setAttribute('name',form.name + ' ' + lesson.name_en)
-        } catch (e) {}
-
         const desc = section.querySelector('.description')
         desc.textContent = lesson.desc_ru
         desc.setAttribute('title', lesson.desc_en)
