@@ -42,6 +42,7 @@ function initializeWorkbook() {
 
             const qanswer = tplAnswer.cloneNode(true)
             qanswer.querySelector('input').setAttribute('name', 'task_'+task.id)
+            qanswer.querySelector('input').setAttribute('id', 'task_'+task.id)
             qanswer.querySelector('input').setAttribute('value', task.en)
             q.querySelector('li').appendChild(qanswer)
 
