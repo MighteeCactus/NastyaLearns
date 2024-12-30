@@ -54,7 +54,9 @@ body {
 }
 
 .header {
+    max-width: var(--w);
     padding: 20px;
+    margin: 0 auto;
     margin-bottom: 10px;
 }
 
