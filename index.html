@@ -22,22 +22,50 @@
 <header class="header">
     <h1>Сайт для Насти, чтобы учить английский.</h1>
 </header>
+
 <main class="content">
     <ul class="tab-header tab-header-flex">
-        <li class="tab-active">Начало 1</li>
-        <li>Начало 2</li>
+<!--        <li class="tab-active">Начало 1</li>-->
+<!--        <li>Начало 2</li>-->
     </ul>
+    <div class="sep"></div>
+<!--    <section class="tab">-->
+<!--        <form name="workbook" netlify>-->
+<!--            <input hidden id="section" name="section" type="text" value="Начало 1"/>-->
+<!--            <ul class="question">-->
+<!--                <li><span class="ru">Я кошка.</span><span class="eng">I am a <qu>cat</qu>.</span></li>-->
+<!--                <li><span class="ru">Это собака.</span><span class="eng">It is a <label for="v1" class="visually-hidden"></label><input id="v1" name="v1" type="text" maxlength="20"/><input hidden id="answer" name="answer" type="text"/>.</span></li>-->
+<!--            </ul>-->
+<!--            <button type="submit">Отправить</button>-->
+<!--        </form>-->
+<!--    </section>-->
+</main>
+
+<template id="form">
     <section class="tab">
-        <form action="">
-            <ul class="question">
-                <li><span class="ru">Я кошка.</span><span class="eng">I am a <qu>cat</qu>.</span></li>
-                <li><span class="ru">Это собака.</span><span class="eng">It is a <label for="v1" class="visually-hidden"></label><input id="v1" type="text" maxlength="20"/>.</span></li>
+        <p class="description"></p>
+        <form name="workbook" netlify>
+            <input hidden id="section" name="section" type="text" value="Начало 1"/>
+            <ul class="questions">
             </ul>
             <button type="submit">Отправить</button>
         </form>
     </section>
-</main>
+</template>
 
-<script src="js/app.js"></script>
+<template id="question">
+    <li><span class="ru">Я кошка.</span><span class="en">I am a <qu>cat</qu>.</span></li>
+</template>
+<template id="q-variant">
+    <label for="v1" class="visually-hidden"></label><input id="v1" name="v1" type="text" maxlength="20"/>
+</template>
+<template id="q-answer">
+    <input hidden name="answer" type="text"/>
+</template>
+<template id="header">
+    <li class="">Начало 1</li>
+</template>
+
+<script type="module" src="js/app.js"></script>
 </body>
 </html>

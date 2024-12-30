@@ -13,10 +13,13 @@ html, body {
 }
 
 :root {
+    --w: 700px;
+
     --clr-bg: #1e3b4c;
     --clr-bg-tab: #2b535e;
     --clr-bg-tab-active: #3a6d75;
-    --clr-text: #c6d1d1
+    --clr-sep: rgba(0,0,0, 0.5);
+    --clr-text: #c6d1d1;
 }
 
 .visually-hidden {
@@ -29,16 +32,25 @@ html, body {
     width: 1px;
 }
 
+.sep
+{
+    margin: 10px auto;
+    width: 95%;
+    height: 2px;
+    background-color: var(--clr-sep);
+}
+
 body {
     font-family: Verdana, sans-serif;
     line-height: 1.6;
     background-color: var(--clr-bg);
     color: var(--clr-text);
-    font-size: 0.8em;
 }
 
 .content {
+    max-width: var(--w);
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .header {
@@ -47,11 +59,11 @@ body {
 }
 
 .header h1 {
-    font-size: 1.0em;
+    font-size: 1.6em;
 }
 
 .tab-header {
-
+    margin-left: 20px;
 }
 
 .tab-header li {
@@ -66,9 +78,9 @@ body {
 }
 
 .tab-header-flex {
-    display: flex;
+    display: inline-flex;
     gap: 5px;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .tab {
@@ -76,11 +88,15 @@ body {
     padding: 10px;
 }
 
-.question {
+.description {
+    padding: 5px;
+}
+
+.questions {
     list-style: decimal;
 }
 
-.question input[type="text"] {
+.questions input[type="text"] {
     background-color: rgba(0,0,0,0.4);
     outline: none;
     font-size: inherit;
@@ -92,7 +108,18 @@ body {
     padding: 3px;
 }
 
+.questions .ru,
+.questions .en {
+    margin-right: 20px;
+}
+
 button[type="submit"] {
     margin-top: 20px;
     padding: 10px 50px;
+    border-radius: 10px;
+    background-color: var(--clr-bg-tab-active);
+    font-size: 1.1em;
+    font-family: inherit;
+    color: inherit;
+    border: 1px solid rgba(0,0,0,0);
 }
