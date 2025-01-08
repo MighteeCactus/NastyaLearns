@@ -183,6 +183,39 @@ button.give-new {
     margin-left: 20px;
 }
 
+.give-up {
+    position: absolute;
+    opacity: 0;
+    transition: all 2s ease;
+}
+
+.give-up.on {
+    position: relative;
+    opacity: 0.7;
+}
+
+.btn-react {
+    animation: bounce 2s;
+}
+
+@keyframes bounce {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 576px) {
     .footer {
         min-height: 20vh;

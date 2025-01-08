@@ -1,6 +1,7 @@
 import workbook from './workbook.js'
 
 const MAX_TASKS = 5
+const MAX_ATTEMPTS = 15
 
 const tplAnswer = document.querySelector('template#q-answer').content
 const tplQuestion = document.querySelector('template#question').content
@@ -38,16 +39,28 @@ function initializeWorkbook() {
             const inputs = qs.querySelectorAll('input[type="text"]')
             let count = 0
             inputs.forEach((input, i) => {
-                const answer = input.getAttribute('data-answer').toLowerCase().trim().replace(" ", "")
-                const value = input.value.toLowerCase().trim().replace(" ", "")
+                const value = input.value.toLowerCase().trim().replaceAll(" ", "")
+                if (value === '') return
+
+                const answer = input.getAttribute('data-answer').toLowerCase().trim().replaceAll(" ", "")
                 input.classList.remove('succ', 'fail')
                 input.classList.add(answer === value ? 'succ' : 'fail')
                 if (answer === value) count++
             })
 
+            const form = evt.target.closest('form')
+            form.attempts++
+
             if (count === inputs.length) {
                 evt.target.submit()
+            } else if (form.attempts >= MAX_ATTEMPTS && form.lesson.answers_allowed) {
+                form.querySelectorAll('.give-up').forEach(el => el.classList.add('on'))
             }
+        })
+
+        section.querySelector('button.submit').addEventListener('click', (evt) => {
+            evt.target.classList.add('btn-react')
+            setTimeout(function() { evt.target.classList.remove('btn-react') }, 2100)
         })
 
         section.querySelector('button.give-new').addEventListener('click', (evt) => {
@@ -65,6 +78,8 @@ document.addEventListener('DOMContentLoaded', initializeWorkbook)
 
 function updateQuestions(elem) {
     const form = elem.closest('form')
+
+    form.attempts = 0
 
     // questions
     const qs = form.querySelector('ul.questions')
@@ -118,7 +133,7 @@ function generateQuestionWithInputs(str) {
             `<input type="text" autocomplete="off" id="v?" name="v?" maxlength="${chunk.length+2}" size="${chunk.length+2}" data-answer="${chunk.slice(1, -1)}">`)
     }
 
-    result += `<input type="hidden" id="q?" name="q?" value="${str}">`
+    result += `<input type="hidden" id="q?" name="q?" value="${str}"> <span class="give-up">${str.replaceAll('_', '')}</span>`
 
     return result
 }

@@ -5,6 +5,7 @@ export default [
         'name_en': 'Basic sentences 1',
         'desc_ru': 'Заполни недостающие слова.',
         'desc_en': 'Fill in missing words',
+        'answers_allowed': true,
         'tasks': [
             {
                 'id': 1,
@@ -134,6 +135,7 @@ export default [
         'name_en': 'Basic sentences 2',
         'desc_ru': 'Заполни недостающие слова.',
         'desc_en': 'Fill in missing words',
+        'answers_allowed': true,
         'tasks': [
             {
                 'id': 1,
@@ -233,6 +235,7 @@ export default [
         'name_en': '...',
         'desc_ru': 'Будем добавлять по мере необходимости.',
         'desc_en': 'We\' add more when we need it',
+        'answers_allowed': false,
         'tasks': []
     }
 ]
