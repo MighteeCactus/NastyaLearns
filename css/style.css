@@ -91,6 +91,7 @@ body {
     border: 2px solid black;
     border-radius: 5px;
     background-color: var(--clr-bg-tab);
+    transition: background-color 0.3s ease;
 }
 
 .section[open] summary {
