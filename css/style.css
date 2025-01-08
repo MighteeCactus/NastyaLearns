@@ -20,6 +20,7 @@ html, body {
     --clr-bg-tab-active: #3a6d75;
     --clr-sep: rgba(0,0,0, 0.5);
     --clr-text: #c6d1d1;
+    --clr-hint: rgba(255,255,255,0.1);
 }
 
 .visually-hidden {
@@ -55,47 +56,57 @@ body {
 
 .header {
     max-width: var(--w);
-    padding: 20px;
-    margin: 0 auto;
-    margin-bottom: 10px;
+    padding: 20px 40px;
+    margin: 20px auto;
+    text-align: center;
 }
 
 .header h1 {
     font-size: 1.6em;
 }
 
-.tab-header {
-    margin-left: 20px;
+.footer {
 }
 
-.tab-header li {
-    padding: 5px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+
+.section {
+    margin: 10px;
+}
+
+.section summary {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.4em;
+    border: 2px solid black;
+    border-radius: 5px;
     background-color: var(--clr-bg-tab);
 }
 
-.tab-header li.tab-active {
+.section[open] summary {
+    border-bottom: none;
     background-color: var(--clr-bg-tab-active);
+    text-align: center;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-.tab-header-flex {
-    display: inline-flex;
-    gap: 5px;
-    font-size: 1.4em;
-}
-
-.tab {
-    margin: 10px;
+.details-inner {
     padding: 10px;
+    margin-bottom: 30px;
 }
 
 .description {
     padding: 5px;
+    margin-bottom: 20px;
 }
 
 .questions {
+    margin-left: 30px;
     list-style: decimal;
+}
+
+.questions li {
+    margin-bottom: 20px;
 }
 
 .questions input[type="text"] {
@@ -112,7 +123,24 @@ body {
 
 .questions .ru,
 .questions .en {
-    margin-right: 20px;
+    margin-bottom: 5px;
+}
+
+.hint {
+    background-color: var(--clr-hint);
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+.questions input[type="text"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
+
 }
 
 button[type="submit"] {
@@ -124,4 +152,10 @@ button[type="submit"] {
     font-family: inherit;
     color: inherit;
     border: 1px solid rgba(0,0,0,0);
+}
+
+@media (max-width: 576px) {
+    .footer {
+        min-height: 20vh;
+    }
 }

@@ -1,8 +1,8 @@
 export default [
     {
         'id': 1,
-        'name_ru': 'Начало 1',
-        'name_en': 'Basics 1',
+        'name_ru': 'Простые предложения 1',
+        'name_en': 'Basic sentences 1',
         'desc_ru': 'Заполни недостающие слова.',
         'desc_en': 'Fill in missing words',
         'tasks': [
@@ -14,27 +14,29 @@ export default [
             {
                 'id': 2,
                 'ru': 'Это _кошка_',
-                'en': 'It is _a cat_'
-            }
-        ]
-    },
-    {
-        'id': 2,
-        'name_ru': 'Начало 2',
-        'name_en': 'Basics 2',
-        'desc_ru': 'Заполни недостающие слова.',
-        'desc_en': 'Fill in missing words',
-        'tasks': [
+                'en': 'This is _a cat_'
+            },
             {
-                'id': 1,
+                'id': 3,
                 'ru': 'Это _стол_',
                 'en': 'It is _a table_'
             },
             {
-                'id': 2,
+                'id': 4,
                 'ru': 'Это _лампа_',
                 'en': 'It is _a lamp_'
             }
+        ]
+    },
+
+    {
+        'id': 999,
+        'name_ru': '...',
+        'name_en': '...',
+        'desc_ru': 'Будем добавлять по мере необходимости.',
+        'desc_en': 'We\' add more when we need it',
+        'tasks': [
+
         ]
     }
 ]
