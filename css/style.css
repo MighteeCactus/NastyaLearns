@@ -18,9 +18,15 @@ html, body {
     --clr-bg: #1e3b4c;
     --clr-bg-tab: #2b535e;
     --clr-bg-tab-active: #3a6d75;
+    --clr-bg-submit: #3a6d75;
+    --clr-bg-submit-off: rgba(58, 109, 117, 0.37);
+
     --clr-sep: rgba(0,0,0, 0.5);
     --clr-text: #c6d1d1;
     --clr-hint: rgba(255,255,255,0.1);
+    --clr-bg-answer: rgba(0,0,0,0.4);
+    --clr-bg-answer-succ: rgba(23, 135, 9, 0.4);
+    --clr-bg-answer-fail: rgba(174, 29, 29, 0.4);
 }
 
 .visually-hidden {
@@ -48,14 +54,16 @@ body {
     color: var(--clr-text);
 }
 
-.content {
+.container {
     max-width: var(--w);
     margin: 0 auto;
+}
+
+.content {
     padding: 0 20px;
 }
 
 .header {
-    max-width: var(--w);
     padding: 20px 40px;
     margin: 20px auto;
     text-align: center;
@@ -66,6 +74,9 @@ body {
 }
 
 .footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin: 0 auto;
 }
 
 
@@ -110,7 +121,7 @@ body {
 }
 
 .questions input[type="text"] {
-    background-color: rgba(0,0,0,0.4);
+    background-color: var(--clr-bg-answer);
     outline: none;
     font-size: inherit;
     font-family: inherit;
@@ -140,18 +151,36 @@ body {
     font-family: inherit;
     font-size: inherit;
     text-align: center;
-
 }
 
-button[type="submit"] {
+.questions input[type="text"].succ {
+    background-color: var(--clr-bg-answer-succ);
+}
+.questions input[type="text"].fail {
+    background-color: var(--clr-bg-answer-fail);
+}
+
+button.submit,
+button.give-new {
     margin-top: 20px;
     padding: 10px 50px;
     border-radius: 10px;
-    background-color: var(--clr-bg-tab-active);
+    background-color: var(--clr-bg-submit);
     font-size: 1.1em;
     font-family: inherit;
     color: inherit;
     border: 1px solid rgba(0,0,0,0);
+    cursor: pointer;
+}
+button.submit[disabled],
+button.give-new[disabled] {
+    background-color: var(--clr-bg-submit-off);
+    cursor: not-allowed;
+}
+
+button.give-new {
+    padding: 10px 15px;
+    margin-left: 20px;
 }
 
 @media (max-width: 576px) {

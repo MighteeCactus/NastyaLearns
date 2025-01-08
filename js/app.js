@@ -1,5 +1,7 @@
 import workbook from './workbook.js'
 
+const MAX_TASKS = 5
+
 const tplAnswer = document.querySelector('template#q-answer').content
 const tplQuestion = document.querySelector('template#question').content
 const tplForm = document.querySelector('template#form').content
@@ -12,6 +14,8 @@ function initializeWorkbook() {
 
         const section = tplForm.cloneNode(true)
 
+        section.querySelector('form').lesson = lesson
+
         // header
         const header = section.querySelector('summary')
         header.textContent = lesson.name_ru
@@ -23,36 +27,34 @@ function initializeWorkbook() {
         desc.textContent = lesson.desc_ru
         desc.setAttribute('title', lesson.desc_en)
 
+        updateQuestions(section.querySelector('form'))
         // questions
         const qs = section.querySelector('ul.questions')
-        qs.querySelectorAll('input').forEach(el => el.remove())
 
-        shuffleArray(lesson.tasks)
+        section.querySelector('form').addEventListener('submit', (evt) => {
+            evt.preventDefault()
+            evt.stopPropagation()
 
-        for(let k in lesson.tasks) {
-            const task = lesson.tasks[k]
+            const inputs = qs.querySelectorAll('input[type="text"]')
+            let count = 0
+            inputs.forEach((input, i) => {
+                const answer = input.getAttribute('data-answer').toLowerCase().trim().replace(" ", "")
+                const value = input.value.toLowerCase().trim().replace(" ", "")
+                input.classList.remove('succ', 'fail')
+                input.classList.add(answer === value ? 'succ' : 'fail')
+                if (answer === value) count++
+            })
 
-            const q = tplQuestion.cloneNode(true)
-            q.querySelector('.ru').innerHTML = generateHints(task.ru)
-            q.querySelector('.en').innerHTML = generateQuestionWithInputs(task.en)
-
-
-            const qanswer = tplAnswer.cloneNode(true)
-            qanswer.querySelector('input').setAttribute('name', 'task_'+task.id)
-            qanswer.querySelector('input').setAttribute('id', 'task_'+task.id)
-            qanswer.querySelector('input').setAttribute('value', task.en)
-            q.querySelector('li').appendChild(qanswer)
-
-            qs.appendChild(q)
-        }
-
-        qs.querySelectorAll('input[type="text"]').forEach((input, i) => {
-            input.id = `v${i+1}`
-            input.setAttribute('name', `v${i+1}`)
+            if (count === inputs.length) {
+                evt.target.submit()
+            }
         })
-        qs.querySelectorAll('input[type="hidden"]').forEach((input, i) => {
-            input.id = `q${i+1}`
-            input.setAttribute('name', `q${i+1}`)
+
+        section.querySelector('button.give-new').addEventListener('click', (evt) => {
+            evt.preventDefault()
+            evt.stopPropagation()
+
+            updateQuestions(evt.target)
         })
 
         containerLessons.appendChild(section)
@@ -60,6 +62,49 @@ function initializeWorkbook() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeWorkbook)
+
+function updateQuestions(elem) {
+    const form = elem.closest('form')
+
+    // questions
+    const qs = form.querySelector('ul.questions')
+    qs.querySelectorAll('li').forEach(el => el.remove())
+
+    shuffleArray(form.lesson.tasks)
+    const tasks = form.lesson.tasks.slice(0, MAX_TASKS)
+    shuffleArray(tasks)
+
+    for(let k in tasks) {
+        const task = tasks[k]
+
+        const q = tplQuestion.cloneNode(true)
+        q.querySelector('.ru').innerHTML = generateHints(task.ru)
+        q.querySelector('.en').innerHTML = generateQuestionWithInputs(task.en)
+
+
+        const qanswer = tplAnswer.cloneNode(true)
+        qanswer.querySelector('input').setAttribute('name', 'task_'+task.id)
+        qanswer.querySelector('input').setAttribute('id', 'task_'+task.id)
+        qanswer.querySelector('input').setAttribute('value', task.en)
+        q.querySelector('li').appendChild(qanswer)
+
+        qs.appendChild(q)
+    }
+
+    qs.querySelectorAll('input[type="text"]').forEach((input, i) => {
+        input.id = `v${i+1}`
+        input.setAttribute('name', `v${i+1}`)
+    })
+    qs.querySelectorAll('input[type="hidden"]').forEach((input, i) => {
+        input.id = `q${i+1}`
+        input.setAttribute('name', `q${i+1}`)
+    })
+
+    form.querySelector('button.submit').disabled   = tasks.length === 0
+    form.querySelector('button.give-new').disabled = tasks.length === 0
+}
+
+
 
 function generateQuestionWithInputs(str) {
     const pairs = extractQuestions(str)
@@ -70,7 +115,7 @@ function generateQuestionWithInputs(str) {
         const chunk = str.substring(pair[0], pair[1]+1)
         result = result.replace(
             chunk,
-            `<input type="text" autocomplete="off" id="v?" name="v?" maxlength="${chunk.length+2}" size="${chunk.length+2}" data-correct="${chunk.slice(1, -1)}">`)
+            `<input type="text" autocomplete="off" id="v?" name="v?" maxlength="${chunk.length+2}" size="${chunk.length+2}" data-answer="${chunk.slice(1, -1)}">`)
     }
 
     result += `<input type="hidden" id="q?" name="q?" value="${str}">`
